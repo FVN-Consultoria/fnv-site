@@ -1,0 +1,70 @@
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'Public Sans', sans-serif;
+  color: #151a33;
+  background: #fbfbfe;
+}
+a { color: #4a63ff; text-decoration: none; }
+a:hover { color: #3648d6; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #4a63ff; color: #fff;
+  font-family: 'Public Sans', sans-serif; font-weight: 700; font-size: 14px;
+  padding: 14px 28px; border-radius: 6px;
+  text-transform: uppercase; letter-spacing: .06em;
+  transition: background .2s;
+}
+.btn-primary:hover { background: #3648d6; color: #fff; }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent; color: #fff;
+  font-family: 'Public Sans', sans-serif; font-weight: 700; font-size: 14px;
+  padding: 14px 28px; border-radius: 6px;
+  border: 1.5px solid rgba(255,255,255,.3);
+  text-transform: uppercase; letter-spacing: .06em;
+  transition: border-color .2s;
+}
+.btn-outline:hover { border-color: #fff; color: #fff; }
+
+.section-label {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 700; font-size: 13px; letter-spacing: .12em;
+  color: #4a63ff; text-transform: uppercase;
+}
+.section-title {
+  margin: 0;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800; line-height: 1.15; color: #151a33;
+}
+
+ul { margin: 0; padding: 0; list-style: none; }
+
+.faq-item {
+  border: 1px solid #e3e5ef; border-radius: 14px;
+  padding: 8px 24px; background: #fff;
+}
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 16px 0; cursor: pointer;
+}
+.faq-q span { font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 16px; }
+.faq-a {
+  margin: 0; padding: 0 0 20px;
+  font-size: 15px; line-height: 1.65; color: #5b6178;
+  display: none;
+}
+.faq-item.open .faq-a { display: block; }
+.faq-item.open .faq-q span { color: #4a63ff; }
+.faq-item.open .vbar { transform: scaleY(0); }
+
+input, textarea {
+  padding: 12px 14px; border-radius: 10px;
+  border: 1px solid #e3e5ef;
+  font-family: 'Public Sans', sans-serif; font-size: 15px;
+  width: 100%;
+}
+input:focus, textarea:focus { outline: none; border-color: #4a63ff; }
