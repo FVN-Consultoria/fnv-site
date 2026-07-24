@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom'
 import logo from '../assets/logo-fvn.svg'
+
+const BASE = import.meta.env.BASE_URL
 
 const IconPhone = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8fa0f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -61,11 +64,11 @@ export default function Footer() {
             Links Rápidos
           </span>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px 28px' }}>
-            <a href="/#sobre" style={{ fontSize: 14, color: '#aab3d9' }}>Sobre nós</a>
-            <a href="/#projetos" style={{ fontSize: 14, color: '#aab3d9' }}>Projetos</a>
-            <a href="/#servicos" style={{ fontSize: 14, color: '#aab3d9' }}>Serviços</a>
-            <a href="/central-gestor" style={{ fontSize: 14, color: '#aab3d9' }}>Central do Gestor</a>
-            <a href="/#contato" style={{ fontSize: 14, color: '#aab3d9' }}>Contato</a>
+            <a href={`${BASE}#sobre`} style={{ fontSize: 14, color: '#aab3d9' }}>Sobre nós</a>
+            <a href={`${BASE}#projetos`} style={{ fontSize: 14, color: '#aab3d9' }}>Projetos</a>
+            <a href={`${BASE}#servicos`} style={{ fontSize: 14, color: '#aab3d9' }}>Serviços</a>
+            <Link to="/central-gestor" style={{ fontSize: 14, color: '#aab3d9' }}>Central do Gestor</Link>
+            <a href={`${BASE}#contato`} style={{ fontSize: 14, color: '#aab3d9' }}>Contato</a>
             <a href="#" style={{ fontSize: 14, color: '#aab3d9' }}>Política de Privacidade</a>
           </div>
         </div>
