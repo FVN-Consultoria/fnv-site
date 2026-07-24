@@ -20,7 +20,7 @@ export default function Header() {
   return (
     <header
       style={{
-        position: isCentralGestor ? 'sticky' : 'absolute',
+        position: 'sticky',
         top: 0,
         left: 0,
         right: 0,
@@ -30,8 +30,8 @@ export default function Header() {
         justifyContent: 'space-between',
         gap: 24,
         padding: '20px 48px',
-        background: isCentralGestor ? '#0b1130' : 'transparent',
-        borderBottom: isCentralGestor ? '1px solid rgba(74,99,255,.18)' : 'none',
+        background: '#0b1130',
+        borderBottom: '1px solid rgba(74,99,255,.18)',
       }}
     >
       <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>

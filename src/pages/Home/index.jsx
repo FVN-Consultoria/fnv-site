@@ -81,12 +81,12 @@ const FAQS = [
 
 function Hero() {
   return (
-    <section id="hero" style={{ position: 'relative', overflow: 'hidden', background: '#0b1130', minHeight: 720 }}>
+    <section id="hero" style={{ position: 'relative', overflow: 'hidden', background: '#0b1130', minHeight: 600 }}>
       <div style={{ position: 'absolute', inset: 0, zIndex: 0, backgroundColor: '#0b1130', backgroundImage: `url(${heroBg})`, backgroundSize: 'cover', backgroundPosition: 'right center' }}>
         <img src={heroBg} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'right center', display: 'block' }} />
       </div>
       <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(90deg,rgba(11,17,48,.85) 0%,rgba(11,17,48,.6) 40%,rgba(11,17,48,.15) 70%,rgba(11,17,48,0) 90%)', pointerEvents: 'none' }} />
-      <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', gap: 64, maxWidth: 1280, margin: '0 auto', padding: '120px 48px 80px', flexWrap: 'wrap', minHeight: 720 }}>
+      <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', gap: 64, maxWidth: 1280, margin: '0 auto', padding: '80px 48px', flexWrap: 'wrap', minHeight: 600 }}>
         <div style={{ flex: '0 1 620px', maxWidth: 620, marginRight: 'auto', display: 'flex', flexDirection: 'column', gap: 22, minWidth: 320 }}>
           <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '.12em', color: '#8fa0f5', textTransform: 'uppercase' }}>Gestão Inteligente</span>
           <h1 style={{ margin: 0, fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 'clamp(34px,4.2vw,62px)', lineHeight: 1.05, color: '#fff', letterSpacing: '-.01em' }}>
