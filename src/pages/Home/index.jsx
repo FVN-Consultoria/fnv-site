@@ -1,17 +1,26 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import heroBg from '../../assets/hero-bg.png'
+import heroBgMobile from '../../assets/mobile/hero-bg-mobile.webp'
 import heroCentralGestor from '../../assets/banner-central-do-gestor.png'
+import heroCentralGestorMobile from '../../assets/mobile/banner-central-do-gestor-mobile.webp'
 import iconService from '../../assets/icon-service.svg'
 import projectBudget from '../../assets/call_5tAkgdlKa9mGVwAqpHvZEGNj.png'
+import projectBudgetMobile from '../../assets/mobile/call_5tAkgdlKa9mGVwAqpHvZEGNj-mobile.webp'
 import projectMap from '../../assets/call_dH0qEnjcSNtW2tq18pCF6MkR.png'
+import projectMapMobile from '../../assets/mobile/call_dH0qEnjcSNtW2tq18pCF6MkR-mobile.webp'
 import projectMining from '../../assets/call_k1fXbNxgdQTQgxJmzZRZmSfP.png'
+import projectMiningMobile from '../../assets/mobile/call_k1fXbNxgdQTQgxJmzZRZmSfP-mobile.webp'
 import projectCosts from '../../assets/call_xgvBVtn3BZLhEBGQdeHUaneT.png'
+import projectCostsMobile from '../../assets/mobile/call_xgvBVtn3BZLhEBGQdeHUaneT-mobile.webp'
 import logoGovernoEstadual from '../../assets/governo-estadual.png'
 import logoMineracao from '../../assets/setor-mineracao.png'
 import logoPrefeitura1 from '../../assets/prefeitura-municipal-01.png'
 import logoPrefeitura2 from '../../assets/prefeitura-municipal-02.png'
 import sobreImage from '../../assets/sobre.png'
+import sobreImageMobile from '../../assets/mobile/sobre-mobile.webp'
+
+const isMobileDevice = () => window.matchMedia('(max-width: 600px)').matches
 
 const WHATSAPP_URL =
   'https://wa.me/5531999180500?text=Ol%C3%A1!%20Gostaria%20de%20obter%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20trabalho%20realizado%20pela%20FVN.'
@@ -59,10 +68,10 @@ const SERVICES = [
 ]
 
 const PROJECTS = [
-  { tag: 'Órgão Público', org: 'Prefeitura Municipal', title: 'Dashboard Financeiro', text: 'Painel com indicadores orçamentários e financeiros para acompanhamento em tempo real.', image: projectBudget, logo: logoPrefeitura1 },
-  { tag: 'Órgão Público', org: 'Prefeitura Municipal', title: 'Planejamento Municipal', text: 'Plano diretor e estratégia de captação de recursos.', image: projectMap, logo: logoPrefeitura2 },
-  { tag: 'Órgão Público', org: 'Governo Estadual', title: 'Gestão de Custos', text: 'Análise e controle de custos com foco em eficiência e resultados.', image: projectMining, logo: logoGovernoEstadual },
-  { tag: 'Empresa Privada', org: 'Setor de Mineração', title: 'Power BI Corporativo', text: 'Implantação de dashboards em tempo real para tomada de decisão.', image: projectCosts, logo: logoMineracao },
+  { tag: 'Órgão Público', org: 'Prefeitura Municipal', title: 'Dashboard Financeiro', text: 'Painel com indicadores orçamentários e financeiros para acompanhamento em tempo real.', image: projectBudget, imageMobile: projectBudgetMobile, logo: logoPrefeitura1 },
+  { tag: 'Órgão Público', org: 'Prefeitura Municipal', title: 'Planejamento Municipal', text: 'Plano diretor e estratégia de captação de recursos.', image: projectMap, imageMobile: projectMapMobile, logo: logoPrefeitura2 },
+  { tag: 'Órgão Público', org: 'Governo Estadual', title: 'Gestão de Custos', text: 'Análise e controle de custos com foco em eficiência e resultados.', image: projectMining, imageMobile: projectMiningMobile, logo: logoGovernoEstadual },
+  { tag: 'Empresa Privada', org: 'Setor de Mineração', title: 'Power BI Corporativo', text: 'Implantação de dashboards em tempo real para tomada de decisão.', image: projectCosts, imageMobile: projectCostsMobile, logo: logoMineracao },
 ]
 
 const STEPS = [
@@ -89,6 +98,7 @@ const SLIDES = [
     ),
     text: 'Soluções completas em gestão pública e empresarial com inteligência de dados, planejamento estratégico, Power BI e captação de recursos.',
     image: heroBg,
+    imageMobile: heroBgMobile,
     imageFit: 'cover',
     actions: [
       { label: 'SOLICITAR PROPOSTA →', href: WHATSAPP_URL, external: true, variant: 'primary' },
@@ -102,6 +112,7 @@ const SLIDES = [
     ),
     text: 'Acompanhe os prazos do mês, consulte leis por área e fale direto com um especialista da FVN sempre que precisar.',
     image: heroCentralGestor,
+    imageMobile: heroCentralGestorMobile,
     imageFit: 'cover',
     actions: [
       { label: 'ACESSAR CENTRAL DO GESTOR →', to: '/central-gestor', variant: 'primary' },
@@ -113,6 +124,14 @@ const AUTOPLAY_MS = 7000
 
 function Hero() {
   const [active, setActive] = useState(0)
+  const [isMobile, setIsMobile] = useState(isMobileDevice)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 600px)')
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -139,7 +158,7 @@ function Hero() {
                 inset: 0,
                 zIndex: 0,
                 backgroundColor: '#0a1445',
-                backgroundImage: `url(${slide.image})`,
+                backgroundImage: `url(${isMobile && slide.imageMobile ? slide.imageMobile : slide.image})`,
                 backgroundSize: slide.imageFit,
                 backgroundPosition: 'right center',
                 backgroundRepeat: 'no-repeat',
@@ -250,7 +269,10 @@ function About() {
     <section id="sobre" style={{ scrollMarginTop: 96, background: '#f5f6fa', padding: 'clamp(56px,10vw,100px) clamp(20px,6vw,48px)' }}>
       <div className="about-flex" style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 64, flexWrap: 'wrap', marginBottom: 64 }}>
         <div className="about-img-wrap" style={{ flex: '1 1 380px', minWidth: 'min(300px,100%)', height: 380, borderRadius: 24, overflow: 'hidden' }}>
-          <img src={sobreImage} alt="Equipe da FVN Consultores em reunião" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
+          <picture>
+            <source srcSet={sobreImageMobile} media="(max-width: 600px)" type="image/webp" />
+            <img src={sobreImage} alt="Equipe da FVN Consultores em reunião" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
+          </picture>
         </div>
         <div style={{ flex: '1 1 440px', minWidth: 'min(320px,100%)', display: 'flex', flexDirection: 'column', gap: 20 }}>
           <span className="section-label">Sobre a FVN</span>
@@ -322,7 +344,10 @@ function Projects() {
                   <span style={{ fontWeight: 600, fontSize: 13, color: '#fff' }}>{p.org}</span>
                 </div>
               </div>
-              <img src={p.image} alt={p.title} style={{ width: '100%', height: 150, objectFit: 'cover', objectPosition: 'center', borderRadius: 10, display: 'block' }} />
+              <picture>
+                <source srcSet={p.imageMobile} media="(max-width: 600px)" type="image/webp" />
+                <img src={p.image} alt={p.title} style={{ width: '100%', height: 150, objectFit: 'cover', objectPosition: 'center', borderRadius: 10, display: 'block' }} />
+              </picture>
               <div>
                 <h3 style={{ margin: '0 0 6px', fontFamily: "'Archivo',sans-serif", fontWeight: 700, fontSize: 17, color: '#fff' }}>{p.title}</h3>
                 <p style={{ margin: 0, fontSize: 13, lineHeight: 1.55, color: '#aab3d9' }}>{p.text}</p>
