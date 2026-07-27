@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import heroBg from '../../assets/hero-bg.png'
+import heroCentralGestor from '../../assets/banner-central-do-gestor.png'
 import iconService from '../../assets/icon-service.svg'
 import projectBudget from '../../assets/call_5tAkgdlKa9mGVwAqpHvZEGNj.png'
 import projectMap from '../../assets/call_dH0qEnjcSNtW2tq18pCF6MkR.png'
@@ -79,27 +81,145 @@ const FAQS = [
   { q: 'Como a FVN auxilia na captação de recursos financeiros?', a: 'Estabelecemos métricas e indicadores essenciais para identificar as melhores oportunidades de financiamento junto a instituições nacionais e internacionais.' },
 ]
 
+const SLIDES = [
+  {
+    kicker: 'Gestão Inteligente',
+    title: (
+      <>Transformamos dados em decisões que geram <span style={{ color: '#8fa0f5' }}>resultados.</span></>
+    ),
+    text: 'Soluções completas em gestão pública e empresarial com inteligência de dados, planejamento estratégico, Power BI e captação de recursos.',
+    image: heroBg,
+    imageFit: 'cover',
+    actions: [
+      { label: 'SOLICITAR PROPOSTA →', href: WHATSAPP_URL, external: true, variant: 'primary' },
+      { label: '▷ VER NOSSOS PROJETOS', href: '#projetos', variant: 'outline' },
+    ],
+  },
+  {
+    kicker: 'Exclusivo para gestores públicos',
+    title: (
+      <>Legislação, prazos e orientação técnica na <span style={{ color: '#8fa0f5' }}>Central do Gestor.</span></>
+    ),
+    text: 'Acompanhe os prazos do mês, consulte leis por área e fale direto com um especialista da FVN sempre que precisar.',
+    image: heroCentralGestor,
+    imageFit: 'cover',
+    actions: [
+      { label: 'ACESSAR CENTRAL DO GESTOR →', to: '/central-gestor', variant: 'primary' },
+    ],
+  },
+]
+
+const AUTOPLAY_MS = 7000
+
 function Hero() {
+  const [active, setActive] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActive((i) => (i + 1) % SLIDES.length)
+    }, AUTOPLAY_MS)
+    return () => clearInterval(id)
+  }, [])
+
   return (
-    <section id="hero" style={{ position: 'relative', overflow: 'hidden', background: '#0b1130', minHeight: 600 }}>
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0, backgroundColor: '#0b1130', backgroundImage: `url(${heroBg})`, backgroundSize: 'cover', backgroundPosition: 'right center' }}>
-        <img src={heroBg} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'right center', display: 'block' }} />
-      </div>
-      <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(90deg,rgba(11,17,48,.85) 0%,rgba(11,17,48,.6) 40%,rgba(11,17,48,.15) 70%,rgba(11,17,48,0) 90%)', pointerEvents: 'none' }} />
-      <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', gap: 64, maxWidth: 1280, margin: '0 auto', padding: '80px 48px', flexWrap: 'wrap', minHeight: 600 }}>
-        <div style={{ flex: '0 1 620px', maxWidth: 620, marginRight: 'auto', display: 'flex', flexDirection: 'column', gap: 22, minWidth: 320 }}>
-          <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '.12em', color: '#8fa0f5', textTransform: 'uppercase' }}>Gestão Inteligente</span>
-          <h1 style={{ margin: 0, fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 'clamp(34px,4.2vw,62px)', lineHeight: 1.05, color: '#fff', letterSpacing: '-.01em' }}>
-            Transformamos dados em decisões que geram <span style={{ color: '#8fa0f5' }}>resultados.</span>
-          </h1>
-          <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: '#aab3d9', maxWidth: 520 }}>
-            Soluções completas em gestão pública e empresarial com inteligência de dados, planejamento estratégico, Power BI e captação de recursos.
-          </p>
-          <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginTop: 12 }}>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener" className="btn-primary">SOLICITAR PROPOSTA →</a>
-            <a href="#projetos" className="btn-outline">▷ VER NOSSOS PROJETOS</a>
+    <section id="hero" style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg,#0f1a5c 0%,#0a1445 45%,#050a26 100%)', minHeight: 'clamp(560px,92vw,720px)' }}>
+      <div
+        style={{
+          display: 'flex',
+          width: `${SLIDES.length * 100}%`,
+          transform: `translateX(-${active * (100 / SLIDES.length)}%)`,
+          transition: 'transform .6s ease',
+        }}
+      >
+        {SLIDES.map((slide, i) => (
+          <div key={i} style={{ position: 'relative', width: `${100 / SLIDES.length}%`, minHeight: 'clamp(560px,92vw,720px)' }}>
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                zIndex: 0,
+                backgroundColor: '#0a1445',
+                backgroundImage: `url(${slide.image})`,
+                backgroundSize: slide.imageFit,
+                backgroundPosition: 'right center',
+                backgroundRepeat: 'no-repeat',
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                zIndex: 1,
+                background:
+                  'linear-gradient(90deg,rgba(11,17,48,.85) 0%,rgba(11,17,48,.6) 40%,rgba(11,17,48,.15) 70%,rgba(11,17,48,0) 90%)',
+                pointerEvents: 'none',
+              }}
+            />
+            <div
+              style={{
+                position: 'relative',
+                zIndex: 2,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 64,
+                maxWidth: 1280,
+                margin: '0 auto',
+                padding: 'clamp(90px,18vw,120px) clamp(20px,6vw,48px) clamp(48px,10vw,80px)',
+                flexWrap: 'wrap',
+                minHeight: 'clamp(560px,92vw,720px)',
+              }}
+            >
+              <div style={{ flex: '0 1 620px', maxWidth: 620, marginRight: 'auto', display: 'flex', flexDirection: 'column', gap: 22, minWidth: 'min(320px,100%)' }}>
+                <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '.12em', color: '#8fa0f5', textTransform: 'uppercase' }}>
+                  {slide.kicker}
+                </span>
+                <h1 style={{ margin: 0, fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 'clamp(34px,4.2vw,62px)', lineHeight: 1.05, color: '#fff', letterSpacing: '-.01em' }}>
+                  {slide.title}
+                </h1>
+                <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: '#aab3d9', maxWidth: 520 }}>{slide.text}</p>
+                <div className="hero-actions" style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginTop: 12 }}>
+                  {slide.actions.map((a, j) =>
+                    a.to ? (
+                      <Link key={j} to={a.to} className={a.variant === 'primary' ? 'btn-primary' : 'btn-outline'}>
+                        {a.label}
+                      </Link>
+                    ) : (
+                      <a
+                        key={j}
+                        href={a.href}
+                        target={a.external ? '_blank' : undefined}
+                        rel={a.external ? 'noopener' : undefined}
+                        className={a.variant === 'primary' ? 'btn-primary' : 'btn-outline'}
+                      >
+                        {a.label}
+                      </a>
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        ))}
+      </div>
+
+      <div style={{ position: 'absolute', zIndex: 3, bottom: 28, left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: 10 }}>
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            aria-label={`Ir para slide ${i + 1}`}
+            style={{
+              width: i === active ? 28 : 10,
+              height: 10,
+              borderRadius: 999,
+              border: 'none',
+              cursor: 'pointer',
+              background: i === active ? '#4a63ff' : 'rgba(255,255,255,.35)',
+              transition: 'all .25s ease',
+              padding: 0,
+            }}
+          />
+        ))}
       </div>
     </section>
   )
@@ -108,7 +228,7 @@ function Hero() {
 function StatsBar() {
   return (
     <section style={{ background: '#0a0f2e', borderTop: '1px solid rgba(74,99,255,.15)', padding: 0 }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', flexWrap: 'wrap' }}>
+      <div className="stats-bar-inner" style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', flexWrap: 'wrap' }}>
         {STATS.map((s, i) => (
           <div key={i} style={{ flex: '1 1 180px', padding: '28px 24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, borderLeft: '1px solid rgba(74,99,255,.15)' }}>
             <div style={{ width: 40, height: 40, borderRadius: '50%', border: '1.5px solid #4a63ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -127,12 +247,12 @@ function StatsBar() {
 
 function About() {
   return (
-    <section id="sobre" style={{ scrollMarginTop: 96, background: '#f5f6fa', padding: '100px 48px' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 64, flexWrap: 'wrap', marginBottom: 64 }}>
-        <div style={{ flex: '1 1 380px', minWidth: 300, height: 380, borderRadius: 24, overflow: 'hidden' }}>
+    <section id="sobre" style={{ scrollMarginTop: 96, background: '#f5f6fa', padding: 'clamp(56px,10vw,100px) clamp(20px,6vw,48px)' }}>
+      <div className="about-flex" style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 64, flexWrap: 'wrap', marginBottom: 64 }}>
+        <div className="about-img-wrap" style={{ flex: '1 1 380px', minWidth: 'min(300px,100%)', height: 380, borderRadius: 24, overflow: 'hidden' }}>
           <img src={sobreImage} alt="Equipe da FVN Consultores em reunião" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
         </div>
-        <div style={{ flex: '1 1 440px', minWidth: 320, display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <div style={{ flex: '1 1 440px', minWidth: 'min(320px,100%)', display: 'flex', flexDirection: 'column', gap: 20 }}>
           <span className="section-label">Sobre a FVN</span>
           <h2 className="section-title" style={{ fontSize: 'clamp(28px,3.6vw,40px)' }}>Excelência em consultoria e planejamento estratégico</h2>
           <p style={{ margin: 0, fontSize: 17, lineHeight: 1.7, color: '#5b6178' }}>
@@ -157,7 +277,7 @@ function About() {
 
 function Services() {
   return (
-    <section id="servicos" style={{ scrollMarginTop: 96, background: '#fff', padding: '100px 48px' }}>
+    <section id="servicos" style={{ scrollMarginTop: 96, background: '#fff', padding: 'clamp(56px,10vw,100px) clamp(20px,6vw,48px)' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <h2 style={{ margin: '0 0 56px', textAlign: 'center', fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 'clamp(26px,3.2vw,36px)', letterSpacing: '.02em' }}>O QUE FAZEMOS</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: 28 }}>
@@ -186,7 +306,7 @@ function Services() {
 
 function Projects() {
   return (
-    <section id="projetos" style={{ scrollMarginTop: 96, background: '#0b1130', padding: '100px 48px' }}>
+    <section id="projetos" style={{ scrollMarginTop: 96, background: 'linear-gradient(135deg,#0f1a5c 0%,#0a1445 45%,#050a26 100%)', padding: 'clamp(56px,10vw,100px) clamp(20px,6vw,48px)' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 24, marginBottom: 40, flexWrap: 'wrap' }}>
           <h2 style={{ margin: 0, fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 'clamp(24px,3vw,32px)', color: '#fff', letterSpacing: '.04em' }}>PROJETOS REALIZADOS</h2>
@@ -218,11 +338,11 @@ function Projects() {
 
 function HowItWorks() {
   return (
-    <section id="como-funciona" style={{ scrollMarginTop: 96, background: '#fff', padding: '100px 48px' }}>
+    <section id="como-funciona" style={{ scrollMarginTop: 96, background: '#fff', padding: 'clamp(56px,10vw,100px) clamp(20px,6vw,48px)' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <h2 style={{ margin: '0 0 56px', textAlign: 'center', fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 'clamp(26px,3.2vw,36px)', letterSpacing: '.02em' }}>COMO FUNCIONA</h2>
-        <div style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
-          <div style={{ position: 'absolute', top: 22, left: 60, right: 60, borderTop: '2px dashed #e3e5ef', zIndex: 0 }} />
+        <div className="steps-grid" style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
+          <div className="steps-line" style={{ position: 'absolute', top: 22, left: 60, right: 60, borderTop: '2px dashed #e3e5ef', zIndex: 0 }} />
           {STEPS.map((s) => (
             <div key={s.n} style={{ position: 'relative', zIndex: 1, flex: '1 1 160px', minWidth: 150, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 14 }}>
               <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#4a63ff', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Archivo',sans-serif", fontWeight: 700, fontSize: 15 }}>{s.n}</div>
@@ -238,7 +358,7 @@ function HowItWorks() {
 
 function CTA() {
   return (
-    <section style={{ background: 'linear-gradient(135deg,#151f6d 0%,#0b1130 100%)', padding: '72px 48px' }}>
+    <section style={{ background: 'linear-gradient(135deg,#0f1a5c 0%,#0a1445 45%,#050a26 100%)', padding: 'clamp(48px,9vw,72px) clamp(20px,6vw,48px)' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 32, flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 600 }}>
           <h2 style={{ margin: 0, fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 'clamp(24px,3vw,32px)', color: '#fff' }}>VAMOS TRANSFORMAR SUA GESTÃO EM RESULTADOS?</h2>
@@ -252,7 +372,7 @@ function CTA() {
 function FAQ() {
   const [openIdx, setOpenIdx] = useState(null)
   return (
-    <section id="faq" style={{ scrollMarginTop: 96, padding: '100px 48px', maxWidth: 840, margin: '0 auto' }}>
+    <section id="faq" style={{ scrollMarginTop: 96, padding: 'clamp(56px,10vw,100px) clamp(20px,6vw,48px)', maxWidth: 840, margin: '0 auto' }}>
       <div style={{ textAlign: 'center', marginBottom: 48, display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
         <span className="section-label">F.A.Q</span>
         <h2 className="section-title" style={{ fontSize: 'clamp(28px,3.6vw,40px)' }}>Perguntas frequentes</h2>
@@ -290,9 +410,9 @@ function Contact() {
   }
 
   return (
-    <section id="contato" style={{ scrollMarginTop: 96, background: '#f5f6fa', padding: '100px 48px' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', gap: 64, flexWrap: 'wrap' }}>
-        <div style={{ flex: '1 1 380px', minWidth: 300, display: 'flex', flexDirection: 'column', gap: 32 }}>
+    <section id="contato" style={{ scrollMarginTop: 96, background: '#f5f6fa', padding: 'clamp(56px,10vw,100px) clamp(20px,6vw,48px)' }}>
+      <div className="contact-flex" style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', gap: 64, flexWrap: 'wrap' }}>
+        <div style={{ flex: '1 1 380px', minWidth: 'min(300px,100%)', display: 'flex', flexDirection: 'column', gap: 32 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <span className="section-label">Contato</span>
             <h2 className="section-title" style={{ fontSize: 'clamp(28px,3.6vw,40px)' }}>Vamos conversar sobre o seu projeto</h2>
@@ -312,7 +432,7 @@ function Contact() {
             </div>
           </div>
         </div>
-        <form onSubmit={handleSubmit} style={{ flex: '1 1 380px', minWidth: 300, background: '#fff', border: '1px solid #e3e5ef', borderRadius: 20, padding: 40, display: 'flex', flexDirection: 'column', gap: 18 }}>
+        <form onSubmit={handleSubmit} style={{ flex: '1 1 380px', minWidth: 'min(300px,100%)', background: '#fff', border: '1px solid #e3e5ef', borderRadius: 20, padding: 'clamp(24px,6vw,40px)', display: 'flex', flexDirection: 'column', gap: 18 }}>
           <label style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 13, fontWeight: 600 }}>
             Nome
             <input type="text" placeholder="Seu nome" value={name} onChange={(e) => setName(e.target.value)} />

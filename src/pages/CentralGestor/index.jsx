@@ -75,7 +75,7 @@ export default function CentralGestor() {
     <div style={{ background: '#fbfbfe' }}>
 
       {/* Banner */}
-      <section style={{ background: 'linear-gradient(135deg,#0b1130 0%,#151f6d 100%)', padding: '72px 48px 80px' }}>
+      <section style={{ background: 'linear-gradient(135deg,#0f1a5c 0%,#0a1445 45%,#050a26 100%)', padding: 'clamp(140px,30vw,184px) clamp(20px,6vw,48px) clamp(48px,10vw,80px)' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '.12em', color: '#8fa0f5', textTransform: 'uppercase' }}>
             Exclusivo para gestores públicos
@@ -90,7 +90,7 @@ export default function CentralGestor() {
       </section>
 
       {/* Prazos do Mês */}
-      <section style={{ background: '#fff', borderBottom: '1px solid #e3e5ef', padding: '56px 48px' }}>
+      <section style={{ background: '#fff', borderBottom: '1px solid #e3e5ef', padding: 'clamp(40px,8vw,56px) clamp(20px,6vw,48px)' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 32 }}>
             <span style={{ fontSize: 24 }}>📅</span>
@@ -159,7 +159,7 @@ export default function CentralGestor() {
       </section>
 
       {/* Legislação por Área */}
-      <section style={{ padding: '72px 48px' }}>
+      <section style={{ padding: 'clamp(48px,9vw,72px) clamp(20px,6vw,48px)' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <div style={{ marginBottom: 40 }}>
             <span className="section-label">Consulta rápida</span>
@@ -243,7 +243,7 @@ export default function CentralGestor() {
       </section>
 
       {/* Materiais e Orientações */}
-      <section style={{ background: '#f5f6fa', padding: '72px 48px' }}>
+      <section style={{ background: '#f5f6fa', padding: 'clamp(48px,9vw,72px) clamp(20px,6vw,48px)' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <div style={{ marginBottom: 40 }}>
             <span className="section-label">Downloads</span>
@@ -272,7 +272,7 @@ export default function CentralGestor() {
       </section>
 
       {/* CTA Final */}
-      <section style={{ background: 'linear-gradient(135deg,#0b1130 0%,#151f6d 100%)', padding: '72px 48px' }}>
+      <section style={{ background: 'linear-gradient(135deg,#0f1a5c 0%,#0a1445 45%,#050a26 100%)', padding: 'clamp(48px,9vw,72px) clamp(20px,6vw,48px)' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center' }}>
           <h2 style={{ margin: 0, fontFamily: "'Archivo',sans-serif", fontWeight: 800, fontSize: 'clamp(24px,3vw,36px)', color: '#fff' }}>
             Precisa de apoio técnico para sua prefeitura?

@@ -36,28 +36,25 @@ export default function Footer() {
       style={{
         background: 'linear-gradient(135deg,#0f1a5c 0%,#0a1445 45%,#050a26 100%)',
         color: '#aab3d9',
-        padding: '56px 48px 40px',
+        padding: 'clamp(40px,8vw,56px) clamp(20px,6vw,48px) clamp(28px,6vw,40px)',
         borderTop: '1px solid rgba(74,99,255,.18)',
       }}
     >
       <div
+        className="footer-grid"
         style={{
           maxWidth: 1280,
           margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '1.6fr 1px 1.4fr 1px 1.4fr 1px auto',
-          gap: 32,
-          alignItems: 'center',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
           <img src={logo} alt="FVN Consultores" style={{ height: 76, width: 'auto', display: 'block', marginLeft: -8 }} />
           <p style={{ margin: 0, fontSize: 13, lineHeight: 1.5, color: '#aab3d9', maxWidth: 220 }}>
             Inteligência, estratégia e resultados para prefeituras e empresas.
           </p>
         </div>
 
-        <div style={{ width: 1, alignSelf: 'stretch', background: 'rgba(255,255,255,.14)' }} />
+        <div className="footer-divider" style={{ width: 1, alignSelf: 'stretch', background: 'rgba(255,255,255,.14)' }} />
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
           <span style={{ fontWeight: 700, fontSize: 13, color: '#fff', textTransform: 'uppercase', letterSpacing: '.14em' }}>
@@ -73,7 +70,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div style={{ width: 1, alignSelf: 'stretch', background: 'rgba(255,255,255,.14)' }} />
+        <div className="footer-divider" style={{ width: 1, alignSelf: 'stretch', background: 'rgba(255,255,255,.14)' }} />
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
           <span style={{ fontWeight: 700, fontSize: 13, color: '#fff', textTransform: 'uppercase', letterSpacing: '.14em' }}>
@@ -89,7 +86,7 @@ export default function Footer() {
           </a>
         </div>
 
-        <div style={{ width: 1, alignSelf: 'stretch', background: 'rgba(255,255,255,.14)' }} />
+        <div className="footer-divider" style={{ width: 1, alignSelf: 'stretch', background: 'rgba(255,255,255,.14)' }} />
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
           <a href="https://www.linkedin.com/company/fvn-consultores-associados/" target="_blank" rel="noopener" aria-label="LinkedIn">

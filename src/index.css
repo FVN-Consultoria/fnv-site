@@ -2,9 +2,86 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
+  overflow-x: hidden;
   font-family: 'Public Sans', sans-serif;
   color: #151a33;
   background: #fbfbfe;
+}
+
+nav.nav-desktop { display: flex; }
+a.nav-toggle, button.nav-toggle { display: none; }
+div.nav-mobile { display: none; }
+
+@media (max-width: 860px) {
+  nav.nav-desktop { display: none; }
+  a.portal-desktop { display: none; }
+  button.nav-toggle { display: flex; }
+  div.nav-mobile.open { display: flex; }
+}
+
+div.steps-line { display: none; }
+@media (min-width: 860px) {
+  div.steps-line { display: block; }
+}
+
+@media (max-width: 600px) {
+  /* Stats: grid 2 colunas */
+  .stats-bar-inner {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .stats-bar-inner > div {
+    border-left: none !important;
+    border-top: 1px solid rgba(74,99,255,.15);
+    justify-content: flex-start !important;
+    padding: 18px 20px !important;
+  }
+
+  /* Botões hero menores e centralizados */
+  .hero-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .hero-actions a {
+    justify-content: center !important;
+    text-align: center;
+    font-size: 13px !important;
+    padding: 13px 18px !important;
+    letter-spacing: .04em !important;
+  }
+
+  /* Seção Sobre: imagem menor, gap menor */
+  .about-flex {
+    gap: 28px !important;
+  }
+  .about-img-wrap {
+    height: 220px !important;
+  }
+
+  /* Contato: gap menor */
+  .contact-flex {
+    gap: 32px !important;
+  }
+
+  /* Steps: empilha limpo */
+  .steps-grid {
+    gap: 28px !important;
+  }
+  .steps-grid > div {
+    flex: 1 1 100% !important;
+    min-width: 100% !important;
+  }
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1px 1.4fr 1px 1.4fr 1px auto;
+  gap: 32px;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-divider { display: none; }
 }
 a { color: #4a63ff; text-decoration: none; }
 a:hover { color: #3648d6; }
